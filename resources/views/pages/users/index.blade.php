@@ -14,7 +14,7 @@
             <div class="section-header">
                 <h1>Users</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('users.create') }}"
+                    <a href="{{ route('user.create') }}"
                         class="btn btn-primary">Add New</a>
                 </div>
                 <div class="section-header-breadcrumb">
@@ -49,7 +49,7 @@
                                     </select>
                                 </div>
                                 <div class="float-right">
-                                    <form method="GET" action="{{ route('users.index') }}">
+                                    <form method="GET" action="{{ route('user.index') }}">
                                         <div class="input-group">
                                             <input type="text"
                                                 class="form-control"
@@ -85,12 +85,12 @@
                                             <td>{{ $user->created_at }}</td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
-                                                    <a href="{{ route('users.edit', $user->id) }}">
+                                                    <a href="{{ route('user.edit', $user->id) }}">
                                                         <div class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                         </div>
                                                     </a>
-                                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="ml-2">
+                                                    <form action="{{ route('user.destroy', $user->id) }}" method="POST" class="ml-2">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         <button class="btn btn-sm btn-danger btn-icon" onclick="return confirmDelete({{ $user->id }})">

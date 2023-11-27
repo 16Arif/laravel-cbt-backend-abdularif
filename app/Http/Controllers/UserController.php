@@ -21,34 +21,34 @@ class UserController extends Controller
             })
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return view('pages.user.index', compact('users'));
+        return view('pages.users.index', compact('users'));
     }
 
     public function create(){
-        return view('pages.user.create');
+        return view('pages.users.create');
     }
 
     public function store(StoreUserRequest $request){
         $data = $request->all();
         $data['password'] = Hash::make($request->password);
         User::create($data);
-        return redirect()->route('users.index')->with('success', 'User Successfully Created');
+        return redirect()->route('user.index')->with('success', 'User Successfully Created');
     }
 
     public function edit($id){
         $user = User::findOrFail($id);
-        return view('pages.user.edit', compact('user'));
+        return view('pages.users.edit', compact('user'));
     }
 
     public function update(UpdateUserRequest $request, User $user){
         $data = $request->validated();
         $user->update($data);
-        return redirect()->route('users.index')->with('success', 'User Successfully Update');
+        return redirect()->route('user.index')->with('success', 'User Successfully Update');
     }
 
     public function destroy(User $user){
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User Successfully Deleted');
+        return redirect()->route('user.index')->with('success', 'User Successfully Deleted');
         
     }
 }

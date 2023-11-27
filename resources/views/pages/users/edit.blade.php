@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add User')
+@section('title', 'Edit User')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -26,16 +26,17 @@
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="#">Manage User</a></div>
-                    <div class="breadcrumb-item">Add User</div>
+                    <div class="breadcrumb-item">Edit User Data</div>
                 </div>
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">Add New User</h2>
+                <h2 class="section-title">Edit User Data</h2>
 
                         <div class="card">
-                            <form action="{{ route('users.store') }}" method="POST">
+                            <form action="{{ route('user.update', $user) }}" method="POST">
                                 @csrf
+                                @method('PUT')
                             <div class="card-header">
                                 <h4>User Data</h4>
                             </div>
@@ -43,7 +44,7 @@
                                 <div class="form-group">
                                     <label>Name</label>
                                     <input type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name">
+                                        class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}">
                                         @error('name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -53,7 +54,7 @@
                                 <div class="form-group">
                                     <label>Email</label>
                                         <input type="email"
-                                            class="form-control @error('email') is-invalid @enderror" name="email">
+                                            class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}">
                                             @error('email')
                                                 {{ $message }}
                                             @enderror
@@ -77,7 +78,10 @@
                                     <label>Phone</label>
                                         
                                         <input type="number"
-                                            class="form-control" name="phone">
+                                            class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}">
+                                            @error('phone')
+                                        {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Roles</label>
@@ -87,21 +91,27 @@
                                                 name="roles"
                                                 value="ADMIN"
                                                 class="selectgroup-input"
-                                                checked="">
+                                                @if ($user->roles == 'ADMIN')
+                                                    checked
+                                                @endif>
                                             <span class="selectgroup-button">ADMIN</span>
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio"
                                                 name="roles"
                                                 value="STAFF"
-                                                class="selectgroup-input">
+                                                class="selectgroup-input" @if ($user->roles == 'STAFF')
+                                                checked
+                                            @endif>
                                             <span class="selectgroup-button">STAFF</span>
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio"
                                                 name="roles"
                                                 value="USER"
-                                                class="selectgroup-input">
+                                                class="selectgroup-input" @if ($user->roles == 'USER')
+                                                checked
+                                            @endif>
                                             <span class="selectgroup-button">USER</span>
                                         </label>
                                     </div>
