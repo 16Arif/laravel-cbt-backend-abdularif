@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\UjianSoalList;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -23,7 +24,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
-            SoalSeeder::class
+            SoalSeeder::class,
+            UjianSeeder::class,
+            UjianSoalListSeeder::class,
         ]);
     }
 }

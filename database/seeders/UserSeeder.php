@@ -21,6 +21,6 @@ class UserSeeder extends Seeder
             'phone' => '08123456789'
         ]);
 
-        \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(19)->create();
     }
 }
